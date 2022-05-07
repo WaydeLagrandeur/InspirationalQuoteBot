@@ -1,90 +1,27 @@
-//const Sequelize = require('sequelize');
-//const sqlite3 = require('sqlite3').verbose();
 const Discord = require('discord.js');
 const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
 const { Console } = require('console');
-//const schedule = require('node-schedule');
+
+
+
+
+
+const { createCanvas, loadImage } = require('canvas')
+const canvas = createCanvas(200, 200)
+const ctx = canvas.getContext('2d')
+
+
+
+
 
 const prefix = '!';
 
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
-//const badWords = ['fuck', 'shit', 'cunt', 'cock', 'dick', 'bitch', 'bastard', 'damn', 'dammit', 'ass', 'hell', 'pussy', 'whore', 'slut', 'piss', 'tit', 'cum', 'fag'];
-//const goodWords = ['frick', 'crap', 'good fellow', 'penis', 'penis', 'female dog', 'child of unwed parents', 'darn', 'darn it', 'bum', 'heck', 'vagina', 'promiscuous woman', 'promiscuous woman', 'pee', 'breast', 'semen', 'bundle of twigs'];
-
-// const sequelize = new Sequelize('database', 'user', 'password', {
-//     host: 'localhost',
-//     dialect: 'sqlite',
-//     logging: false,
-//     storage: 'database.sqlite',
-// });
-
-// const User = sequelize.define('User', {
-//     userID : {
-//         type: Sequelize.INTEGER,
-//     },
-//     userName : {
-//         type: Sequelize.STRING,
-//     },
-//     guildID: {
-//         type: Sequelize.INTEGER,
-//     },
-//     prayersSent: {
-//         type: Sequelize.INTEGER,
-//         defaultValue: 0
-//     },
-//     // weeklySinCount: {
-//     //     type: Sequelize.INTEGER,
-//     //     defaultValue: 0
-//     // },
-//     // monthlySinCount: {
-//     //     type: Sequelize.INTEGER,
-//     //     defaultValue: 0
-//     // },
-//     // yearlySinCount: {
-//     //     type: Sequelize.INTEGER,
-//     //     defaultValue: 0
-//     // },
-//     totalSinCount: {
-//         type: Sequelize.INTEGER,
-//         defaultValue: 0
-//     },
-//     praiseCount: {
-//         type: Sequelize.INTEGER,
-//         defaultValue: 0
-//     },
-//     thoughtsAndPrayersCount: {
-//         type: Sequelize.INTEGER,
-//         defaultValue: 0
-//     },
-//     versesRead: {
-//         type: Sequelize.INTEGER,
-//         defaultValue: 0
-//     }
-// });
-// client.on("ready", () => {
-    
-//     console.log('=============Guild: ' + Guilds)
-// });
 
 client.once('ready', async () => {
     console.log('InspirationalQuoteBot is online!');
-
-    // const clientList = client.members.cache
-    //client.user.setStatus("invisible");
-    // clientList.array.forEach(element => {
-    //     createUser(element, this.guild.id)
-    // });
-
-    // Get the Guild and store it under the variable "list"
-//     const list = client.guilds.get("905232633200525422"); 
-
-// // Iterate through the collection of GuildMembers from the Guild getting the username property of each member 
-//     list.members.forEach(member => console.log(member.user.username)); 
-
-    //User.sync();
-    //{ force: true } USE THIS INSIDE USER.SYNC() TO RESET DATABASE, PROCEED WITH CAUTION
 });
 
 // client.on('message', message => {   
@@ -191,11 +128,87 @@ client.on('message', async message => {
     }
     if(command === 'pic') {
 
-        try {
-            //const imgJSON = await fetch('https://images-api.nasa.gov/search?q=earth').then(response => response.json());
-            //const obj = JSON.stringify(imgJSON, null, 2).toString().split('"');  
+        let imageSent = false;
 
-            message.channel.send({files:[{ attachment: "https://i.imgur.com/a1dbgD0.jpeg" }]});
+        try {
+
+//             let random = Math.floor(Math.random() * 1000);
+//             console.log(random);
+//             fetch("http://www.reddit.com/r/pics/.json").then(r => r.json()).then((r) => {
+//             r.data.children.forEach((i) => {
+//        try{
+//          message.channel.send(i + ".");
+//        } catch (error){console.log(error.message)}
+//  })})
+            const quoteAPI = await fetch('https://api.kanye.rest').then(response => response.json());
+            const quote = JSON.stringify(quoteAPI).toString().split('"');
+            //while(!imageSent) {
+
+            
+                const imgJSON = await fetch('https://www.reddit.com/r/spaceporn/random/.json').then(response => response.json());
+                //const imgJSON = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=' + random.toString() + '&api_key=if3uINFrgnm5tyWSPNYGGQfQeaLAnPxKM4WABVt4').then(response => response.json());
+                const obj = JSON.stringify(imgJSON).toString().split('"');
+                
+                // for(let i = 180; i < 194; i ++) {
+                //     message.channel.send(obj[i] + i);
+                // }
+
+                for(let i = 220; i < 226; i++) {
+
+                    // if(obj[i].endsWith(".jpg") || obj[i].endsWith(".png")) {
+                    //     message.channel.send(obj[i])
+                    //     message.channel.send(quote[3])
+                    //     imageSent = true;
+                    //194
+                        message.channel.send(obj[i])
+
+                        thenum = "foo3bar5".match(/\d+/)[0] // "3"
+
+
+
+                    //     // Write "Awesome!"
+                    //     ctx.font = '12px Impact'
+                    //     ctx.rotate(0.1)
+                    //     ctx.fillText(quote[3], 50, 100)
+
+                    //     // Draw line under text
+                    //     var text = ctx.measureText(quote[3])
+                    //     ctx.strokeStyle = 'rgba(0,0,0,0.5)'
+                    //     ctx.beginPath()
+                    //     ctx.lineTo(50, 102)
+                    //     ctx.lineTo(50 + text.width, 102)
+                    //     ctx.stroke()
+
+                    //     // Draw cat with lime helmet
+                    //     loadImage(obj[i]).then((image) => {
+                    //     ctx.drawImage(image, 50, 0, 70, 70)
+
+                    //     //console.log('<img src="' + canvas.toDataURL() + '" />')
+                    //     })
+
+
+
+
+                    //     const out = fs.createWriteStream('C:/Users/wayde/source/repos/Discord Projects/InspirationalQuoteBot' + '/test.png')
+                    //     const stream = canvas.createPNGStream()
+                    //     stream.pipe(out)
+                    //     out.on('finish', () =>  console.log('The PNG file was created.'))
+
+
+
+
+
+
+
+
+                    //}
+
+                }
+                
+
+            //}
+            
+            // message.channel.send({files:[{ attachment: "https://i.imgur.com/a1dbgD0.jpeg" }]});
 
             // let passageLocation = obj[3] + " " + obj[7] + ":" + obj[11]; 
             // let passage = obj[15]; 
